@@ -1,7 +1,11 @@
 def version = new Date().format("yyyyMMddHHmmss")
 pipeline {
-    agent any
-
+    agent any {
+        docker {
+            image 'maven:3.8.6-openjdk-11'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
     stages {
         stage('checkout github repositoy') {
             steps {
@@ -9,6 +13,7 @@ pipeline {
                 git branch:'main',url : 'https://github.com/Malekbk1/CI_CD_pipeline.git';
             }
         }
+	
         stage('build Maven ') {
             steps {
                

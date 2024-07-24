@@ -12,10 +12,11 @@ pipeline {
         stage('build Maven ') {
             steps {
                 script {
-                    docker.image('maven:3.8.6-openjdk-11').inside('-v /var/run/docker.sock:/var/run/docker.sock') {
+                    docker.image('maven:3.8.6-openjdk-11').inside {
                         sh 'mvn clean install'
 		    }
-            }
+		}
+	    }
         }
         stage('RUN tests') {
             parallel {

@@ -1,12 +1,7 @@
 def version = new Date().format("yyyyMMddHHmmss")
 pipeline {
-    agent{
-        docker {
-            image 'maven:3.8.6-openjdk-11'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
-    stages {
+    agent any
+      stages {
         stage('checkout github repositoy') {
             steps {
                 echo 'pulling';
@@ -16,8 +11,10 @@ pipeline {
 	
         stage('build Maven ') {
             steps {
-               
-                sh 'mvn clean install'
+                script {
+                    docker.image('maven:3.8.6-openjdk-11').inside('-v /var/run/docker.sock:/var/run/docker.sock') {
+                        sh 'mvn clean install'
+		    }
             }
         }
         stage('RUN tests') {

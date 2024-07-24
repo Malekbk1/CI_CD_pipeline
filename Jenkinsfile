@@ -1,6 +1,7 @@
 def version = new Date().format("yyyyMMddHHmmss")
 pipeline {
     agent any
+	tools { maven "Maven3" }   
       stages {
         stage('checkout github repositoy') {
             steps {
@@ -9,15 +10,18 @@ pipeline {
             }
         }
 	
-        stage('build Maven ') {
-            steps {
-                script {
-                    docker.image('maven:3.8.6-openjdk-11').inside {
-                        sh 'mvn clean install'
-		    }
-		}
-	    }
+       stage('build Maven ') { 
+	     steps { 
+		sh 'mvn clean install' 
+             }
         }
-      }
-}
       
+        stage('RUN tests') { 
+		parallel { 
+	      stage('Unit test ') 
+		{ steps { sh 'mvn test' } } 
+            }
+	}
+		
+    }
+}

@@ -25,15 +25,28 @@ pipeline {
 		{ steps { sh 'mvn test' } } 
             }
 	}
-		
-    
-	stage('SonarQube Analysis') {
+		 stage('Docker image '){
             steps {
-                withSonarQubeEnv('sonarqube-10.6.0') {
-                    // Run SonarQube scanner with the token
-                    sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
-                }
+                 sh 'docker build -t rihabhn/backendappimage .'
             }
         }
-   }
+        stage('push to DockerHub'){
+            steps { 
+		        withCredentials([usernamePassword(credentialsId: 'dockerhubdev', passwordVariable: 'PASSWORD', usernameVariable: 'USER')])
+		        {
+                    sh 'docker login -u ${USER} -p ${PASSWORD}'
+                    sh 'docker push rihabhn/backendappimage'
+                    
+                }
+       }
+       }
+        stage('DockerCompose') {
+        
+            steps {
+				    sh 'docker-compose up -d'
+                    }
+                          
+        }
+    
+	
 }

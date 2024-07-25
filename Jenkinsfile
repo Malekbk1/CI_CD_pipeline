@@ -1,6 +1,9 @@
 def version = new Date().format("yyyyMMddHHmmss")
 pipeline {
     agent any
+	environment {
+        SONAR_TOKEN = '9bfe06984c607e7fe7ea7d6e0b62efda'  
+    }
 	tools { maven "Maven3" }   
       stages {
         stage('checkout github repositoy') {
@@ -24,13 +27,12 @@ pipeline {
 	}
 		
     
-	stage('Sonarqube Analysis ') {
+	stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonarqube-10.6.0'){
-                sh 'mvn sonar:sonar'
-                }
+                withSonarQubeEnv('sonarqube-10.6.0') {
+                    // Run SonarQube scanner with the token
+                    sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
                 }
             }
-            
-      }
+        }
 }

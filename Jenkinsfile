@@ -27,7 +27,7 @@ pipeline {
 	}
 		 stage('Docker image '){
             steps {
-                 sh 'docker build -t malek132/malek'
+                 sh 'docker build -t malek132/malek .'
             }
         }
         stage('push to DockerHub'){

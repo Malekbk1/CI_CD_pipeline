@@ -27,7 +27,7 @@ pipeline {
 	}
 		 stage('Docker image '){
             steps {
-                 sh 'docker build -t rihabhn/backendappimage .'
+                 sh 'docker build -t malek132/malek'
             }
         }
         stage('push to DockerHub'){
@@ -35,7 +35,7 @@ pipeline {
 		        withCredentials([usernamePassword(credentialsId: 'dockerhubdev', passwordVariable: 'PASSWORD', usernameVariable: 'USER')])
 		        {
                     sh 'docker login -u ${USER} -p ${PASSWORD}'
-                    sh 'docker push rihabhn/backendappimage'
+                    sh 'docker push malek132/malek'
                     
                 }
        }

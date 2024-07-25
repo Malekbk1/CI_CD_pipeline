@@ -14,6 +14,9 @@
 	<name>SpringBootApp</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
+  		
+                <sonar.token>9bfe06984c607e7fe7ea7d6e0b62efda</sonar.token>
+
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>

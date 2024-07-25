@@ -10,8 +10,8 @@ services:
   volumes:
     - /home/mysqldata:/var/lib/mysql
  spring_app:
-  image: rihabhn/backendappimage
-  container_name: backendappimage
+  image: malek132/malek
+  container_name: malek
   restart: on-failure
   ports:
    - 8089:8089

@@ -14,10 +14,8 @@
 	<name>SpringBootApp</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-  		
-                <sonar.login>${env.SONAR_TOKEN}</sonar.login>
-
 		<java.version>1.8</java.version>
+		<sonar.login>${env.SONAR_TOKEN}</sonar.login> <!-- Utilisation de la variable d'environnement -->
 	</properties>
 	<dependencies>
 		<dependency>
@@ -28,7 +26,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -40,20 +37,23 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>4.0.0.4121</version>
+			</plugin>
 		</plugins>
 	</build>
 	<distributionManagement>
-	  <repository>
-	    <id>springapp-release</id>
-	    <url>http://192.168.1.39:8081/repository/springapp-release/</url>
-	  </repository>
+		<repository>
+			<id>springapp-release</id>
+			<url>http://192.168.1.39:8081/repository/springapp-release/</url>
+		</repository>
 	</distributionManagement>
-
 </project>

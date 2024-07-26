@@ -25,6 +25,15 @@ pipeline {
 		{ steps { sh 'mvn test' } } 
             }
 	}
+	stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonarqube-10.6.0') {
+                    // Run SonarQube scanner with the token
+                    sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
+                }
+            }
+        }
+   
 		 stage('Docker image '){
             steps {
                  sh 'docker build -t malek132/malek .'

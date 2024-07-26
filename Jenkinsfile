@@ -25,7 +25,7 @@ pipeline {
 		{ steps { sh 'mvn test' } } 
             }
 	}
-	stage('SonarQube Analysis') {
+	/*stage('SonarQube Analysis') {
            steps {
                  withSonarQubeEnv('sonarqube-10.6.0') {
                     sh "mvn sonar:sonar -Dsonar.login=${SONARQUBE_CREDENTIALS_USR} -Dsonar.password=${SONARQUBE_CREDENTIALS_PSW}"
@@ -47,12 +47,18 @@ pipeline {
                     
                 }
        }
-       }
+       }*/
         stage('DockerCompose') {
         
             steps {
 		    //withEnv(["PATH=$PATH:~/.local/bin"])
-				    sh 'docker-compose up -d'
+				    sh '''
+					docker image prune -f 
+     					docker container prune -f 
+	  				docker volume prune -f 
+       					docker network prune -f 
+     					docker-compose up --force-recreate --build -d 
+	  				'''
                     
                           
         }

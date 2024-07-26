@@ -57,7 +57,7 @@ pipeline {
      					docker container prune -f 
 	  				docker volume prune -f 
        					docker network prune -f 
-	    				docker stop mysqldb2
+
 	 				docker rm mysqldb2
      					docker-compose up --force-recreate --build -d 
 	  				'''

@@ -25,7 +25,7 @@ pipeline {
 		{ steps { sh 'mvn test' } } 
             }
 	}
-	/*stage('SonarQube Analysis') {
+	stage('SonarQube Analysis') {
            steps {
                  withSonarQubeEnv('sonarqube-10.6.0') {
                     sh "mvn sonar:sonar -Dsonar.login=${SONARQUBE_CREDENTIALS_USR} -Dsonar.password=${SONARQUBE_CREDENTIALS_PSW}"
@@ -47,7 +47,7 @@ pipeline {
                     
                 }
        }
-       }*/
+       }
         stage('DockerCompose') {
         
             steps {

@@ -51,7 +51,7 @@ pipeline {
         stage('DockerCompose') {
         
             steps {
-		    #withEnv(["PATH=$PATH:~/.local/bin"])
+		    //withEnv(["PATH=$PATH:~/.local/bin"])
 				    sh 'docker-compose up -d'
                     
                           

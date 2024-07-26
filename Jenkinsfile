@@ -2,7 +2,7 @@ def version = new Date().format("yyyyMMddHHmmss")
 pipeline {
     agent any
 	environment {
-        SONAR_TOKEN = credentials('sonar-token')
+         SONARQUBE_CREDENTIALS = credentials('sonar-credentials')
     }
 	tools { maven "Maven3" }   
       stages {
@@ -27,8 +27,8 @@ pipeline {
 	}
 	stage('SonarQube Analysis') {
            steps {
-                withSonarQubeEnv('sonarqube-10.6.0') {
-                    sh "mvn sonar:sonar -Dsonar.login=${env.SONAR_TOKEN}"
+                 withSonarQubeEnv('sonarqube-10.6.0') {
+                    sh "mvn sonar:sonar -Dsonar.login=${SONARQUBE_CREDENTIALS_USR} -Dsonar.password=${SONARQUBE_CREDENTIALS_PSW}"
                 }
             }
         }

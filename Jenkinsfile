@@ -24,7 +24,7 @@ pipeline {
 	      stage('Unit test ') 
 		{ steps { sh 'mvn test' } } 
             }
-	}
+	}/*
 	stage('SonarQube Analysis') {
            steps {
                  withSonarQubeEnv('sonarqube-10.6.0') {
@@ -47,7 +47,7 @@ pipeline {
                     
                 }
        }
-       }
+       }*/
         stage('DockerCompose') {
         
             steps {

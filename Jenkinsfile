@@ -2,7 +2,7 @@ def version = new Date().format("yyyyMMddHHmmss")
 pipeline {
     agent any
 	environment {
-        SONAR_TOKEN = '9bfe06984c607e7fe7ea7d6e0b62efda'  
+        SONAR_TOKEN = 'ccd83a357511e2230bb76c65b31d1944'  
     }
 	tools { maven "Maven3" }   
       stages {

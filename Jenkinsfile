@@ -53,7 +53,7 @@ pipeline {
             steps {
 		    //withEnv(["PATH=$PATH:~/.local/bin"])
 				    sh '''
-					docker-compose down -v
+					docker-compose down 
                                         docker-compose up --force-recreate --build -d 
 	  				'''
 		    /*docker image prune -f 
